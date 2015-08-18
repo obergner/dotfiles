@@ -15,5 +15,6 @@ src
 .subversion
 tmp
 .viminfo
+.vim/bundle
 work
 .zshrc
