@@ -18,3 +18,12 @@ tmp
 .vim/bundle
 work
 .zshrc
+.cargo/
+.config/
+.debug/
+.gnupg/
+.pylint.d/
+.python_history
+.wget-hsts
+build/
+share/

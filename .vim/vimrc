@@ -28,8 +28,8 @@ Plugin 'maciakl/vim-neatstatus'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
 Plugin 'rhysd/vim-clang-format'
-Plugin 'rdnetto/YCM-Generator'
-" Plugin 'vivien/vim-addon-linux-coding-style'
+Plugin 'helino/vim-nasm'
+Plugin 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 Plugin 'vim-scripts/paredit.vim'
@@ -103,7 +103,7 @@ set colorcolumn=120
 highlight ColorColumn ctermbg=darkgray
 
 " CTAGS
-set tags=./tags;/,tags;./.tags;/,.tags;/
+set tags=./tags;/,tags;./.tags;/,.tags;./build/tags;./build/.tags;/
 
 " Put all those backup and swp files into a dedicated directory
 set backupdir=~/.vim/backup
@@ -114,7 +114,11 @@ syntax on
 
 " Configure color scheme
 " colorscheme sand
-colorscheme zenburn
+" colorscheme zenburn
+" colorscheme monokai
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 " choose a decent programming font
 set guifont=Inconsolata:h18
@@ -192,16 +196,19 @@ let g:clang_format#auto_formatexpr = 0   " automatically set vim's formatexp, i.
 " Configure clang-format END
 
 " Configure NERDTree BEGIN
-" automatically open file explorer on startup if no file given
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" automatically open file explorer on startup
+autocmd VimEnter *  NERDTree
 " close vim if the only open window left is a nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Increase width of NERDTree file browser window
 let NERDTreeWinSize = 60
 " and show hidden files by default
 let NERDTreeShowHidden = 1
 " Configure NERDTree END
+
+" Configure Tagbar BEGIN
+let g:tagbar_width = 80
+" Configure Tagbar END
 
 " Let vim optionally read additional/overriding settings from the current working directory
 " but DO NOT allow executing shell command et alii from local .vimrc files
